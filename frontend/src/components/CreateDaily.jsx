@@ -16,13 +16,18 @@ const CreateDaily = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:3001/dailies", {
-        title: isTitle,
-        content: isText,
-        image: isImage,
-      });
-      console.log(res);
-      navigate("/");
+      if (isTitle && isText) {
+        const res = await axios.post(
+          "http://localhost:3001/dailies/createDaily",
+          {
+            title: isTitle,
+            content: isText,
+            image: isImage,
+          }
+        );
+        console.log(res);
+        navigate("/");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -30,21 +35,26 @@ const CreateDaily = () => {
 
   return (
     <div className="w-auto m-3">
-      <form action="" className="flex flex-col">
-        <label htmlFor="" className="mb-5">
+      <form
+        action="http://localhost:3001/dailes"
+        method="POST"
+        className="flex flex-col"
+      >
+        <label htmlFor="title" className="mb-5">
           <h2>Title</h2>
           <input
             type="text"
             placeholder="Daily title"
             className="border w-full"
+            id="title"
             onChange={(e) => setIsTitle(e.target.value)}
           />
         </label>
-        <label htmlFor="" className="mb-5">
+        <label htmlFor="content" className="mb-5">
           <h2>Contents</h2>
           <textarea
-            name=""
-            id=""
+            name="content"
+            id="content"
             placeholder="What did you do today?"
             rows={7}
             maxLength={1000}

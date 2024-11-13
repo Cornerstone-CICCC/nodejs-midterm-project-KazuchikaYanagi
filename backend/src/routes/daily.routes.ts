@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction, Router } from "express";
+import dailyController from "../controllers/daily.controller";
 
-const dialyRouter = Router();
+const dailyRouter = Router();
 
-dialyRouter.get("/", (req: Request, res: Response) => {
-  res.status(200).send("hello");
-});
+dailyRouter.get("/", dailyController.getDailies);
 
-export default dialyRouter;
+dailyRouter.post("/createDaily", dailyController.addDailies);
+
+export default dailyRouter;
