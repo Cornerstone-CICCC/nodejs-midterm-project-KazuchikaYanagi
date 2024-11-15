@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import CreateDaily from "./components/CreateDaily";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Navbar from "./pages/Navbar";
+import Home from "./pages/Home";
+import CreateDaily from "./pages/CreateDaily";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { useState } from "react";
 
 function App() {
