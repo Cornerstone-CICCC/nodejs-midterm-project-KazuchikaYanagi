@@ -2,13 +2,14 @@ export type Daily = {
   id: string;
   date: string;
   image: string;
-  // username: string | null;
   title: string;
   content: string;
+  // published: boolean;
+  userId: string;
 };
 
-export type InputDaily = {
-  title: string;
-  content: string;
-  image: string;
-};
+// export type InputDaily = {
+//   title: string;
+//   content: string;
+//   image: string;
+// };

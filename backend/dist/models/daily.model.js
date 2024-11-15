@@ -5,8 +5,15 @@ class DailyModel {
     constructor() {
         this.dailies = [];
     }
-    findAll(id) {
-        const dailies = this.dailies.filter((daily) => daily.id === id);
+    findAll(userId) {
+        const dailies = this.dailies.filter((daily) => daily.userId === userId);
+        return dailies;
+    }
+    findById(id) {
+        const daily = this.dailies.find((daily) => daily.id === id);
+        if (!daily)
+            return undefined;
+        return daily;
     }
     create(newData) {
         let date = new Date();
@@ -14,6 +21,23 @@ class DailyModel {
         this.dailies.push(newTodo);
         console.log(this.dailies);
         return newTodo;
+    }
+    edit(id, newData) {
+        const index = this.dailies.findIndex((daily) => daily.id === id);
+        if (index === -1)
+            return undefined;
+        if (this.dailies[index].userId !== newData.userId)
+            return undefined;
+        const updatedDaily = Object.assign(Object.assign({}, this.dailies[index]), newData);
+        this.dailies[index] = updatedDaily;
+        return updatedDaily;
+    }
+    delete(id, userId) {
+        const index = this.dailies.findIndex((daily) => daily.id === id && daily.userId === userId);
+        if (index === 1)
+            return false;
+        this.dailies.splice(index, 1);
+        return true;
     }
 }
 exports.default = new DailyModel();

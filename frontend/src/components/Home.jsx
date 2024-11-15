@@ -1,52 +1,53 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import RenderPost from "./RenderPost";
 
 const Home = () => {
-  // const getDaily = async () => {
-  //   try {
-  //     const allDailies = await.
-  //   } catch (err) {
+  const [isDaily, setIsDaily] = useState([]);
+  const navigate = useNavigate();
 
-  //   }
-  // }
+  const handleLogout = async () => {
+    const res = await axios.get("http://localhost:3001/users/logout");
+    console.log(res);
+    navigate("/");
+  };
 
-  // const handlePostDaily = async () => {
-  //   try {
-  //     const allDailies = await axios.get("http://localhost:3001/dailies/");
-  //     const { title, content, date, image } = await allDailies.data;
-  //     console.log(title, content, date, image);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  useEffect(() => {
+    let getDaily = async () => {
+      try {
+        const allData = await axios.get("http://localhost:3001/dailies/", {
+          withCredentials: true,
+        });
+        console.log(allData.data);
+        setIsDaily(allData.data);
+        // return allDailies.data;
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getDaily();
+  }, []);
 
-  // handlePostDaily();
+  useEffect(() => {
+    console.log("updated");
+    console.log(isDaily);
+  }, [isDaily]);
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex justify-between w-[80%] bg-red-200 mb-5">
-        <img
-          src="../../public/kusatus-onsen.jpeg"
-          alt="kusatsu"
-          className="radius-md"
-        />
-        <div className="flex">
-          <div>
-            <h1 className="font-semibold text-2xl">Local Trip</h1>
-            <p>I have a wonderful time with my bestie!!</p>
-          </div>
-          <div>
-            <button>
-              <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-            <button>
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
-          </div>
-        </div>
-      </div>
+      {isDaily?.map((p) => {
+        return <RenderPost p={p} key={p.id} />;
+      })}
+
+      <button
+        className="text-white bg-blue-400 p-2 w-40 rounded-full"
+        onClick={handleLogout}
+      >
+        Log out
+      </button>
     </div>
   );
 };

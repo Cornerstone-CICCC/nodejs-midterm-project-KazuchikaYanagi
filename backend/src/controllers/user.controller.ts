@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import userModel from "../models/user.model";
 import { User } from "../types/user";
 import bcrypt from "bcrypt";
+// import { Jwt } from "jsonwebtoken";
+// const jwt = require("jsonwebtoken");
+// import cookieParser from "cookie-parser";
 
 // Get all users
 const getUsers = (req: Request, res: Response): void => {
@@ -35,6 +38,15 @@ const registerUser = async (
     res.status(409).json({ message: "Username taken" });
     return;
   }
+  // const payload = {
+  //   username,
+  //   password,
+  // };
+  // const option = { expires };
+  // const token = jwt.sign({ username, password }, process.env.JWT_SECRET, {
+  //   expiresIn: process.env.JWT_EXPIRES_IN,
+  // });
+
   const hashedPassword = await bcrypt.hash(password, 12);
   const user = userModel.create({ username, password: hashedPassword });
   res.status(201).json(user);

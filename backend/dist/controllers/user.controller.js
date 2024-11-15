@@ -14,6 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("../models/user.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+// import { Jwt } from "jsonwebtoken";
+// const jwt = require("jsonwebtoken");
+// import cookieParser from "cookie-parser";
 // Get all users
 const getUsers = (req, res) => {
     const users = user_model_1.default.findAll();
@@ -41,6 +44,14 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.status(409).json({ message: "Username taken" });
         return;
     }
+    // const payload = {
+    //   username,
+    //   password,
+    // };
+    // const option = { expires };
+    // const token = jwt.sign({ username, password }, process.env.JWT_SECRET, {
+    //   expiresIn: process.env.JWT_EXPIRES_IN,
+    // });
     const hashedPassword = yield bcrypt_1.default.hash(password, 12);
     const user = user_model_1.default.create({ username, password: hashedPassword });
     res.status(201).json(user);
