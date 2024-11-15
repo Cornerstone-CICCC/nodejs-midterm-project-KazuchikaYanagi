@@ -3,7 +3,7 @@ import axios from "axios";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import RenderPost from "./RenderPost";
+import RenderPost from "../components/RenderPost";
 
 const Home = () => {
   const [isDaily, setIsDaily] = useState([]);

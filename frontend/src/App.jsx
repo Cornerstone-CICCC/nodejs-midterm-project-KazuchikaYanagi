@@ -1,12 +1,14 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { createBrowserRouter } from "react-router-dom";
 
-import Navbar from "./pages/Navbar";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import CreateDaily from "./pages/CreateDaily";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
+import Daily from "./pages/Daily";
 
 function App() {
   const [isAuth, setIsAuth] = useState();

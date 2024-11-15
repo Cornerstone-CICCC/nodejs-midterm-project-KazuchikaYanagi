@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const RenderPost = ({ p }) => {
@@ -28,12 +28,18 @@ const RenderPost = ({ p }) => {
           <p>{content}</p>
         </div>
         <span>{date}</span>
-        <div>
-          <button onClick={handleDeleteDaily}>
+        <div className="flex gap-2">
+          <button
+            onClick={handleDeleteDaily}
+            className="w-8 h-8 bg-gray-100 rounded-full"
+          >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
-          <button onClick={handleEditDaily}>
-            <FontAwesomeIcon icon={faPenToSquare} />
+          <button
+            onClick={handleEditDaily}
+            className="w-8 h-8 bg-gray-100 rounded-full"
+          >
+            <FontAwesomeIcon icon={faPen} />
           </button>
         </div>
       </div>
