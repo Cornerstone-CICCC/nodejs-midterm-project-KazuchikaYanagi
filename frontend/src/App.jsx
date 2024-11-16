@@ -29,7 +29,7 @@ function App() {
             path="/home"
             element={<Home postData={postData} isAuth={isAuth} />}
           />
-          <Route path="/daily/:id" element={<Daily />} />
+          <Route path="/daily/edit/:id" element={<Daily />} />
         </Routes>
       </Router>
     </>

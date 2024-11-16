@@ -12,6 +12,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const daily_routes_1 = __importDefault(require("./routes/daily.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const cloudinary_routes_1 = __importDefault(require("./routes/cloudinary.routes"));
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, cors_1.default)({
@@ -32,6 +33,7 @@ app.use((0, cookie_parser_1.default)(process.env.COOKIE_SIGN_KEY));
 // Routes
 app.use("/users", user_routes_1.default);
 app.use("/dailies", daily_routes_1.default);
+app.use("/cloudinary", cloudinary_routes_1.default);
 app.use((req, res) => {
     res.status(404).send("Access denied");
 });

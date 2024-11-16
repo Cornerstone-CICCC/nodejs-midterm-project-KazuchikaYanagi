@@ -32,10 +32,16 @@ const CreateDaily = ({ setPostData }) => {
     }
   };
 
-  // const handlePublishedToggle = (e) => {
-  //   e.preventDefault();
-  //   isPublished = setIsPublished(!isPublished);
-  // };
+  const handleUploadImage = async () => {
+    // e.preventDefault();
+    await axios.post(
+      "http://localhost:3001/cloudinary/upload",
+      {
+        withCredentials: true,
+      },
+      setIsImage(e.target.files[0])
+    );
+  };
 
   return (
     <div className="w-auto m-3">
@@ -70,11 +76,7 @@ const CreateDaily = ({ setPostData }) => {
         </label>
         <label htmlFor="file" className="flex flex-col mb-5">
           <h2>Insert Image</h2>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setIsImage(e.target.value)}
-          />
+          <input type="file" accept="image/*" onChange={handleUploadImage} />
         </label>
         {/* <button
           className={`w-32 p-2 rounded-full mb-5 ${

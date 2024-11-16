@@ -1,11 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RenderPost = ({ p }) => {
   let { title, date, content, id, userId } = p;
+  const navigate = useNavigate();
 
-  const handleEditDaily = () => {};
+  const handleEditDaily = () => {
+    navigate(`/daily/edit/${id}`);
+  };
 
   const handleDeleteDaily = async () => {
     await axios.delete(`http://localhost:3001/dailies/delete/${id}`, {

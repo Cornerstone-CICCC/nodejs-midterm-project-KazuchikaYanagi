@@ -21,16 +21,27 @@ const getDailyById = (req: Request<{ id: string }>, res: Response): void => {
 
 const addDailies = (req: Request<{}, {}, Omit<Daily, "id">>, res: Response) => {
   const { userId } = req.session;
-  // const { title, content, image, published } = req.body;
   const { title, content, image } = req.body;
   if (!title || !content) {
     res.status(400).json({ message: "Missing title or content." });
     return;
   }
-  // const daily = dailyModel.create({ title, content, image, published, userId });
   const daily = dailyModel.create({ title, content, image, userId });
   res.status(201).json(daily);
 };
+
+// const addDailies = (req: Request<{}, {}, Omit<Daily, "id">>, res: Response) => {
+//   const { userId } = req.session;
+//   // const { title, content, image, published } = req.body;
+//   const { title, content, image } = req.body;
+//   if (!title || !content) {
+//     res.status(400).json({ message: "Missing title or content." });
+//     return;
+//   }
+//   // const daily = dailyModel.create({ title, content, image, published, userId });
+//   const daily = dailyModel.create({ title, content, image, userId });
+//   res.status(201).json(daily);
+// };
 
 const updateDailyById = (
   req: Request<{ id: string }, {}, Partial<Daily>>,
@@ -39,9 +50,10 @@ const updateDailyById = (
   const { userId } = req.session;
   const { id } = req.params;
   // const { title, content, published } = req.body;
-  const { title, content } = req.body;
+  const { title, content, image } = req.body;
+  console.log(req.body);
   // const article = dailyModel.edit(id, { title, content, published, userId });
-  const article = dailyModel.edit(id, { title, content, userId });
+  const article = dailyModel.edit(id, { title, content, image, userId });
   if (!article) {
     res.status(404).json({ message: "Daily not found" });
     return;

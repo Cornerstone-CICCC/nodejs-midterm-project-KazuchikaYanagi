@@ -7,6 +7,7 @@ dotenv.config();
 
 import dailyRouter from "./routes/daily.routes";
 import userRouter from "./routes/user.routes";
+import cloudinaryRouter from "./routes/cloudinary.routes";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(cookieParser(process.env.COOKIE_SIGN_KEY));
 // Routes
 app.use("/users", userRouter);
 app.use("/dailies", dailyRouter);
+app.use("/cloudinary", cloudinaryRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404).send("Access denied");
