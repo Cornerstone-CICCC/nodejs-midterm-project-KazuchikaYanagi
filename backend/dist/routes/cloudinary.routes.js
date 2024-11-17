@@ -11,4 +11,5 @@ const cloudinaryRouter = (0, express_1.Router)();
 const storage = multer_1.default.diskStorage({});
 const upload = (0, multer_1.default)({ storage });
 cloudinaryRouter.post("/upload", auth_1.checkAuth, upload.single("image"), cloudinary_controller_1.default.uploadImage);
+cloudinaryRouter.get("/retrieve", auth_1.checkAuth, cloudinary_controller_1.default.retrieveImage);
 exports.default = cloudinaryRouter;

@@ -17,7 +17,11 @@ class DailyModel {
     }
     create(newData) {
         let date = new Date();
-        const newTodo = Object.assign({ id: (0, uuid_1.v4)(), date: `${date.getHours()}:${date.getMinutes()} ${date.getFullYear()}-${date.getMonth()}-${date.getDay()}` }, newData);
+        let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
+        let day = date.getDay() < 10 ? "0" + date.getDay() : date.getDay();
+        const newTodo = Object.assign({ id: (0, uuid_1.v4)(), date: `${hour}:${minute} ${date.getFullYear()}/${month}/${day}` }, newData);
         this.dailies.push(newTodo);
         console.log(this.dailies);
         return newTodo;

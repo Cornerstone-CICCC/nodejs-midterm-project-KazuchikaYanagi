@@ -17,9 +17,14 @@ class DailyModel {
 
   create(newData: Omit<Daily, "id" | "date">) {
     let date = new Date();
+    let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    let minute =
+      date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
+    let day = date.getDay() < 10 ? "0" + date.getDay() : date.getDay();
     const newTodo = {
       id: uuidv4(),
-      date: `${date.getHours()}:${date.getMinutes()} ${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
+      date: `${hour}:${minute} ${date.getFullYear()}/${month}/${day}`,
       ...newData,
     };
     this.dailies.push(newTodo);

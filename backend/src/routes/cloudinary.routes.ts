@@ -15,4 +15,10 @@ cloudinaryRouter.post(
   cloudinaryController.uploadImage
 );
 
+cloudinaryRouter.get(
+  "/retrieve",
+  checkAuth,
+  cloudinaryController.retrieveImage
+);
+
 export default cloudinaryRouter;

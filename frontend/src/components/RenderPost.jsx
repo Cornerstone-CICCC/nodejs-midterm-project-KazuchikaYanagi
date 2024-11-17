@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const RenderPost = ({ p }) => {
   let { title, date, content, id, userId } = p;
+  const [fetchImage, setFetchImage] = useState();
   const navigate = useNavigate();
 
   const handleEditDaily = () => {
@@ -19,13 +21,28 @@ const RenderPost = ({ p }) => {
     window.location.href = "/home";
   };
 
+  useEffect(() => {
+    const fetchImage = async () => {
+      const res = await axios.get("http://localhost:3001/cloudinary/retrieve", {
+        withCredentials: true,
+      });
+      const x = res.data.resources.resources[1].secure_url;
+      // const emptyArr = [];
+      // const { resources } = res.data.resources;
+      // for (let i = resources.length; i >= 0; i--) {
+      //   emptyArr.push(resoruces[i].secure_url);
+      // }
+      // console.log(res.data.resources.resources);
+      console.log(res.data.resources);
+      console.log(x);
+      setFetchImage(x);
+    };
+    fetchImage();
+  }, []);
+
   return (
     <div className="flex justify-between w-[80%] bg-red-200 mb-5">
-      {/* <img
-        src="../../public/kusatus-onsen.jpeg"
-        alt="kusatsu"
-        className="radius-md"
-      /> */}
+      <img src={fetchImage} alt="kusatsu" className="radius-md" />
       <div className="flex">
         <div>
           <h1 className="font-semibold text-2xl">{title}</h1>

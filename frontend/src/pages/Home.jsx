@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import RenderPost from "../components/RenderPost";
 
@@ -31,10 +29,10 @@ const Home = () => {
     getDaily();
   }, []);
 
-  useEffect(() => {
-    console.log("updated");
-    console.log(isDaily);
-  }, [isDaily]);
+  // useEffect(() => {
+  //   console.log("updated");
+  //   console.log(isDaily);
+  // }, [isDaily]);
 
   return (
     <div className="flex flex-col justify-center">

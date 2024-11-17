@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import { v2 as cloudinary } from "cloudinary";
 import cookieSession from "cookie-session";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -31,6 +32,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SIGN_KEY));
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Routes
 app.use("/users", userRouter);

@@ -6,6 +6,7 @@ var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const cloudinary_1 = require("cloudinary");
 const cookie_session_1 = __importDefault(require("cookie-session"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -30,6 +31,12 @@ app.use((0, cookie_session_1.default)({
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)(process.env.COOKIE_SIGN_KEY));
+// Configure Cloudinary
+cloudinary_1.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 // Routes
 app.use("/users", user_routes_1.default);
 app.use("/dailies", daily_routes_1.default);

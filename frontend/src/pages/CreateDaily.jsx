@@ -2,45 +2,69 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const CreateDaily = ({ setPostData }) => {
-  const [isTitle, setIsTitle] = useState();
-  const [isText, setIsText] = useState();
-  const [isImage, setIsImage] = useState();
+const CreateDaily = () => {
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [image, setImage] = useState(null);
+  const [isImage, setIsImage] = useState(false);
+  // const [imgUrl, setImgUrl] = useState();
   // const [isPublished, setIsPublished] = useState(true);
   const navigate = useNavigate();
+
+  const handleUploadImage = (e) => {
+    // e.preventDefault();
+    if (e.target.files) {
+      const file = e.target.files[0];
+      console.log(file);
+      setIsImage(true);
+      setImage(file);
+      // setImgUrl(URL.createObjectURL(file));
+    }
+  };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      console.log(image);
+      if (!image) {
+        console.error("Image file is missing");
+        return navigate("/home");
+      }
+
+      const formData = new FormData();
+      formData.append("image", image);
+
+      const imgUpload = await axios.post(
+        "http://localhost:3001/cloudinary/upload",
+        // { image: isImage },
+        formData,
+        {
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // },
+          withCredentials: true,
+        }
+      );
+      console.log(imgUpload);
+
       const res = await axios.post(
         "http://localhost:3001/dailies/add",
         {
-          title: isTitle,
-          content: isText,
-          image: isImage,
-          // published: isPublished,
+          title: title,
+          content: content,
+          image: imgUpload.data.result.url || "",
+          isImage,
         },
         { withCredentials: true }
       );
 
-      setPostData(res.data);
+      // setPostData(res.data);
       console.log(res.data);
       navigate("/home");
       // }
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const handleUploadImage = async () => {
-    // e.preventDefault();
-    await axios.post(
-      "http://localhost:3001/cloudinary/upload",
-      {
-        withCredentials: true,
-      },
-      setIsImage(e.target.files[0])
-    );
   };
 
   return (
@@ -57,7 +81,7 @@ const CreateDaily = ({ setPostData }) => {
             placeholder="Daily title"
             className="border w-full"
             id="title"
-            onChange={(e) => setIsTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
         </label>
@@ -70,13 +94,18 @@ const CreateDaily = ({ setPostData }) => {
             rows={7}
             maxLength={1000}
             className="border w-full"
-            onChange={(e) => setIsText(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
         </label>
         <label htmlFor="file" className="flex flex-col mb-5">
           <h2>Insert Image</h2>
-          <input type="file" accept="image/*" onChange={handleUploadImage} />
+          <input
+            type="file"
+            accept="image/jpeg, image/png"
+            // onChange={handleUploadImage}
+            onChange={handleUploadImage}
+          />
         </label>
         {/* <button
           className={`w-32 p-2 rounded-full mb-5 ${
@@ -89,7 +118,6 @@ const CreateDaily = ({ setPostData }) => {
         >
           {isPublished ? "Published ON" : "Published OFF"}
         </button> */}
-        {/* <input type="checkbox" name="published" id="published" checked /> */}
         <button
           type="submit"
           className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
