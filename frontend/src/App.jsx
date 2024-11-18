@@ -7,16 +7,19 @@ import Home from "./pages/Home";
 import CreateDaily from "./pages/CreateDaily";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Daily from "./pages/Daily";
 import DetailDaily from "./pages/DetailDaily";
 
 function App() {
+  // const DailyContext = createContext();
+
   const [isAuth, setIsAuth] = useState();
   const [postData, setPostData] = useState([]);
 
   return (
     <>
+      {/* <DailyContext.Provider> */}
       <Router>
         <Navbar />
         <Routes>
@@ -34,6 +37,7 @@ function App() {
           <Route path="/daily/:id" element={<DetailDaily />} />
         </Routes>
       </Router>
+      {/* </DailyContext.Provider> */}
     </>
   );
 }

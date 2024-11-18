@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faPen, faPager } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const RenderPost = ({ p }) => {
   let { title, date, content, image, id } = p;
-  console.log(content);
   const navigate = useNavigate();
 
   const handleEditDaily = () => {
@@ -16,12 +15,21 @@ const RenderPost = ({ p }) => {
     await axios.delete(`http://localhost:3001/dailies/delete/${id}`, {
       withCredentials: true,
     });
-    console.log(id);
     window.location.href = "/home";
   };
 
+  const handleDetailDaily = () => {
+    console.log("click!");
+    // const { id } = isDaily;
+    console.log(id);
+    navigate(`/daily/${id}`);
+  };
+
   return (
-    <div className="flex w-[70%] rounded-md mb-5 mx-[15%] shadow-xl">
+    <div
+      className="flex w-[70%] rounded-md mb-5 mx-[15%] shadow-xl"
+      // onClick={handleDetailDaily}
+    >
       <img
         src={image}
         alt="image"
@@ -48,6 +56,15 @@ const RenderPost = ({ p }) => {
         </div>
         <div className="flex basis-4/12 flex-col p-2">
           <div className="flex flex-1 gap-2 items-center justify-center">
+            <button
+              onClick={handleDetailDaily}
+              className="w-8 h-8 bg-gray-100 rounded-full"
+            >
+              <FontAwesomeIcon
+                icon={faPager}
+                className="text-gray-400 hover:text-black transition-all duration-300"
+              />
+            </button>
             <button
               onClick={handleDeleteDaily}
               className="w-8 h-8 bg-gray-100 rounded-full"

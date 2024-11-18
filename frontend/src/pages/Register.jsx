@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [catchError, setCatchError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -21,6 +22,7 @@ const Register = () => {
       // }
     } catch (err) {
       console.error(err);
+      setCatchError(err.response.data.message);
     }
   };
 
@@ -53,6 +55,9 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
+        {catchError && (
+          <p className="font-semibold text-red-500 mb-5">{catchError}</p>
+        )}
 
         <button
           type="submit"

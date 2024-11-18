@@ -49,6 +49,10 @@ const Daily = () => {
     }
   };
 
+  const handlePreviousPage = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="w-auto m-3">
       <form
@@ -83,18 +87,22 @@ const Daily = () => {
           ></textarea>
         </label>
 
-        <button
-        // onClick={handlePreviousPage}
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
-          onClick={handleUpdate}
-        >
-          Update
-        </button>
+        <div className="flex justify-evenly">
+          <button
+            type="button"
+            className="bg-red-400 text-white p-2 rounded-full w-[20%]"
+            onClick={handlePreviousPage}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
+            onClick={handleUpdate}
+          >
+            Update
+          </button>
+        </div>
       </form>
     </div>
   );

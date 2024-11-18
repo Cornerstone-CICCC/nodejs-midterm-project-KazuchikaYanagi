@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [isError, isSetError] = useState("");
+  const [isError, setIsError] = useState();
 
   const navigate = useNavigate();
 
@@ -23,11 +23,12 @@ const Login = () => {
 
       console.log(res);
       if (res.statusText !== "OK") {
-        isSetError(res.message);
+        console.log(isError);
       }
       navigate("/createDaily");
     } catch (err) {
       console.error(err);
+      setIsError(err.response.data.message);
     }
   };
 
@@ -37,7 +38,6 @@ const Login = () => {
 
   return (
     <div className="w-auto m-5">
-      {isError || ""}
       <form
         action="http://localhost:3001/users/register"
         method="POST"
@@ -59,11 +59,15 @@ const Login = () => {
           <input
             type="password"
             placeholder="password"
-            className="border w-full p-1"
+            className="border w-full p-1 mb-2"
             id="password"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {isError && (
+            <p className="text-red-500 text-lg font-semibold">{isError}</p>
+          )}
         </label>
 
         <div className="flex justify-around">

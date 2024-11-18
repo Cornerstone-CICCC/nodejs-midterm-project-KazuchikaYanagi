@@ -7,18 +7,15 @@ const CreateDaily = () => {
   const [content, setContent] = useState();
   const [image, setImage] = useState(null);
   const [isImage, setIsImage] = useState(false);
-  // const [imgUrl, setImgUrl] = useState();
-  // const [isPublished, setIsPublished] = useState(true);
+
   const navigate = useNavigate();
 
   const handleUploadImage = (e) => {
-    // e.preventDefault();
     if (e.target.files) {
       const file = e.target.files[0];
       console.log(file);
       setIsImage(true);
       setImage(file);
-      // setImgUrl(URL.createObjectURL(file));
     }
   };
 
@@ -36,12 +33,8 @@ const CreateDaily = () => {
 
       const imgUpload = await axios.post(
         "http://localhost:3001/cloudinary/upload",
-        // { image: isImage },
         formData,
         {
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          // },
           withCredentials: true,
         }
       );
@@ -58,10 +51,8 @@ const CreateDaily = () => {
         { withCredentials: true }
       );
 
-      // setPostData(res.data);
       console.log(res.data);
       navigate("/home");
-      // }
     } catch (err) {
       console.error(err);
     }
@@ -103,21 +94,10 @@ const CreateDaily = () => {
           <input
             type="file"
             accept="image/jpeg, image/png"
-            // onChange={handleUploadImage}
             onChange={handleUploadImage}
           />
         </label>
-        {/* <button
-          className={`w-32 p-2 rounded-full mb-5 ${
-            isPublished ? "bg-blue-300" : "bg-red-300"
-          }`}
-          onClick={(e) => {
-            e.preventDefault();
-            setIsPublished(!isPublished);
-          }}
-        >
-          {isPublished ? "Published ON" : "Published OFF"}
-        </button> */}
+
         <button
           type="submit"
           className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
