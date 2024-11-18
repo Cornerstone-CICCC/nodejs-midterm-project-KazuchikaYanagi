@@ -24,8 +24,8 @@ const DetailDaily = () => {
     <div className="mx-[10%]">
       {daily && (
         <>
-          <img src={daily.image} alt="img" className="w-full mx-auto" />
-          <h1 className="font-semibold text-4xl">{daily.title}</h1>
+          <img src={daily.image} alt="img" className="w-full mx-auto mb-3" />
+          <h1 className="font-semibold text-4xl mb-3">{daily.title}</h1>
           <p>{daily.content}</p>
         </>
       )}
