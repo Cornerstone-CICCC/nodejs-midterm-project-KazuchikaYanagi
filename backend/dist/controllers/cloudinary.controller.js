@@ -36,6 +36,30 @@ const uploadImage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(500).json({ success: false, error: err.message });
     }
 });
+const updateImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    try {
+        // const file = req.file?.path; // Path to the file
+        const newFile = (_a = req.file) === null || _a === void 0 ? void 0 : _a.path; // Path to the file
+        console.log(newFile);
+        console.log(req.file);
+        if (!newFile) {
+            res.status(400).json({ success: false, message: "No file uploaded" });
+            return;
+        }
+        const result = yield cloudinary_1.v2.uploader.upload(newFile, {
+            overwrite: true,
+        });
+        res.status(200).json({
+            success: true,
+            message: "File uploaded successfully!",
+            result,
+        });
+    }
+    catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
 const retrieveImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const resources = yield cloudinary_1.v2.api.resources({
@@ -53,5 +77,6 @@ const retrieveImage = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.default = {
     uploadImage,
+    updateImage,
     retrieveImage,
 };

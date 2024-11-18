@@ -10,12 +10,7 @@ const dailyRouter = Router();
 
 // dailyRouter.use(checkAuth);
 
-dailyRouter.post(
-  "/add",
-  checkAuth,
-  // upload.array("images", 5),
-  dailyController.addDailies
-);
+dailyRouter.post("/add", checkAuth, dailyController.addDailies);
 // dailyRouter.post("/add", dailyController.addDailies);
 dailyRouter.put("/update/:id", checkAuth, dailyController.updateDailyById);
 dailyRouter.delete("/delete/:id", checkAuth, dailyController.deleteDailyById);

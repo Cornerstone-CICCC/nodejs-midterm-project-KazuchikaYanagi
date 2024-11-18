@@ -19,20 +19,25 @@ class DailyModel {
         let date = new Date();
         let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
         let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-        let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
-        let day = date.getDay() < 10 ? "0" + date.getDay() : date.getDay();
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let day = ("0" + date.getDate()).slice(-2);
         const newTodo = Object.assign({ id: (0, uuid_1.v4)(), date: `${hour}:${minute} ${date.getFullYear()}/${month}/${day}` }, newData);
         this.dailies.push(newTodo);
         console.log(this.dailies);
         return newTodo;
     }
     edit(id, newData) {
+        let date = new Date();
+        let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let day = ("0" + date.getDate()).slice(-2);
         const index = this.dailies.findIndex((daily) => daily.id === id);
         if (index === -1)
             return undefined;
         if (this.dailies[index].userId !== newData.userId)
             return undefined;
-        const updatedDaily = Object.assign(Object.assign({}, this.dailies[index]), newData);
+        const updatedDaily = Object.assign(Object.assign(Object.assign({}, this.dailies[index]), { date: `${hour}:${minute} ${date.getFullYear()}/${month}/${day}` }), newData);
         this.dailies[index] = updatedDaily;
         return updatedDaily;
     }

@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Daily = () => {
   const [editTitle, setEditTitle] = useState();
   const [editContext, setEditContext] = useState();
-  const [editImage, setEditImage] = useState();
+  // const [editImage, setEditImage] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,11 +16,11 @@ const Daily = () => {
           withCredentials: true,
         });
         // console.log(res.data);
-        const { title, content, image } = await res.data;
-        console.log(title, content, image);
+        const { title, content } = await res.data;
+        console.log(title, content);
         setEditTitle(title);
         setEditContext(content);
-        setEditImage(image);
+        // setEditImage(image);
       } catch (err) {
         console.error(err);
       }
@@ -29,15 +29,24 @@ const Daily = () => {
   }, []);
 
   const handleUpdate = async () => {
-    const data = {
-      title: editTitle,
-      content: editContext,
-      image: editImage || "",
-    };
-    await axios.put(`http://localhost:3001/dailies/update/${id}`, data, {
-      withCredentials: true,
-    });
-    navigate("/home");
+    try {
+      const data = {
+        title: editTitle,
+        content: editContext,
+        // image: editImage || "",
+      };
+      // await axios.put(
+      //   "http://localhost:3001/cloudinary/update",
+      //   { image: editImage },
+      //   { withCredentials: true }
+      // );
+      await axios.put(`http://localhost:3001/dailies/update/${id}`, data, {
+        withCredentials: true,
+      });
+      navigate("/home");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -73,29 +82,14 @@ const Daily = () => {
             required
           ></textarea>
         </label>
-        <label htmlFor="file" className="flex flex-col mb-5">
-          <h2>Insert Image</h2>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setEditImage(e.target.value)}
-            value={editImage}
-          />
-        </label>
-        {/* <button
-          className={`w-32 p-2 rounded-full mb-5 ${
-            isPublished ? "bg-blue-300" : "bg-red-300"
-          }`}
-          onClick={(e) => {
-            e.preventDefault();
-            setIsPublished(!isPublished);
-          }}
-        >
-          {isPublished ? "Published ON" : "Published OFF"}
-        </button> */}
-        {/* <input type="checkbox" name="published" id="published" checked /> */}
+
         <button
-          type="submit"
+        // onClick={handlePreviousPage}
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
           className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
           onClick={handleUpdate}
         >

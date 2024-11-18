@@ -15,6 +15,8 @@ cloudinaryRouter.post(
   cloudinaryController.uploadImage
 );
 
+cloudinaryRouter.put("/update", checkAuth, cloudinaryController.updateImage);
+
 cloudinaryRouter.get(
   "/retrieve",
   checkAuth,

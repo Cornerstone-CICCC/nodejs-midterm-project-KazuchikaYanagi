@@ -19,9 +19,7 @@ const Home = () => {
         const allData = await axios.get("http://localhost:3001/dailies/", {
           withCredentials: true,
         });
-        console.log(allData.data);
         setIsDaily(allData.data);
-        // return allDailies.data;
       } catch (err) {
         console.error(err);
       }
@@ -29,24 +27,29 @@ const Home = () => {
     getDaily();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("updated");
-  //   console.log(isDaily);
-  // }, [isDaily]);
+  const handleDetailDaily = () => {
+    console.log("click!");
+    const { id } = isDaily;
+    console.log(isDaily, id);
+  };
 
   return (
-    <div className="flex flex-col justify-center">
-      {isDaily?.map((p) => {
-        return <RenderPost p={p} key={p.id} />;
-      })}
-
+    <>
+      <div
+        className="flex flex-col-reverse justify-center"
+        onClick={handleDetailDaily}
+      >
+        {isDaily?.map((p) => {
+          return <RenderPost p={p} key={p.id} className="w-full" />;
+        })}
+      </div>
       <button
         className="text-white bg-blue-400 p-2 w-40 rounded-full"
         onClick={handleLogout}
       >
         Log out
       </button>
-    </div>
+    </>
   );
 };
 

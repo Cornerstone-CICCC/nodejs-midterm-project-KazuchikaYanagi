@@ -25,29 +25,29 @@ const Register = () => {
   };
 
   return (
-    <div className="w-auto m-3">
+    <div className="w-auto m-5">
       <form
         action="http://localhost:3001/users/register"
         method="POST"
         className="flex flex-col"
       >
-        <label htmlFor="username" className="mb-5">
-          <h2>Username</h2>
+        <label htmlFor="username" className="mb-10">
+          <h2 className="text-xl mb-2">Username</h2>
           <input
             type="text"
             placeholder="username"
-            className="border w-full"
+            className="border w-full p-1"
             id="username"
             required
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        <label htmlFor="password" className="mb-5">
-          <h2>Password</h2>
+        <label htmlFor="password" className="mb-10">
+          <h2 className="text-xl mb-2">Password</h2>
           <input
             type="password"
             placeholder="password"
-            className="border w-full"
+            className="border w-full p-1"
             id="password"
             required
             onChange={(e) => setPassword(e.target.value)}
@@ -56,7 +56,7 @@ const Register = () => {
 
         <button
           type="submit"
-          className="bg-blue-400 text-white p-2 rounded-full w-[20%]"
+          className="bg-blue-400 text-white p-2 rounded-full w-[20%] hover:bg-blue-500"
           onClick={handleCreateNewUser}
         >
           Register

@@ -68,32 +68,32 @@ const CreateDaily = () => {
   };
 
   return (
-    <div className="w-auto m-3">
+    <div className="w-auto m-5">
       <form
         action="http://localhost:3001/dailes"
         method="POST"
         className="flex flex-col"
       >
         <label htmlFor="title" className="mb-5">
-          <h2>Title</h2>
+          <h2 className="text-xl mb-2">Title</h2>
           <input
             type="text"
             placeholder="Daily title"
-            className="border w-full"
+            className="border w-full p-1"
             id="title"
             onChange={(e) => setTitle(e.target.value)}
             required
           />
         </label>
         <label htmlFor="content" className="mb-5">
-          <h2>Contents</h2>
+          <h2 className="text-xl mb-2">Contents</h2>
           <textarea
             name="content"
             id="content"
             placeholder="What did you do today?"
             rows={7}
             maxLength={1000}
-            className="border w-full"
+            className="border w-full p-1"
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>

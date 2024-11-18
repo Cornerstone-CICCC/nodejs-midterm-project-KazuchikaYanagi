@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
 import Daily from "./pages/Daily";
+import DetailDaily from "./pages/DetailDaily";
 
 function App() {
   const [isAuth, setIsAuth] = useState();
@@ -30,6 +31,7 @@ function App() {
             element={<Home postData={postData} isAuth={isAuth} />}
           />
           <Route path="/daily/edit/:id" element={<Daily />} />
+          <Route path="/daily/:id" element={<DetailDaily />} />
         </Routes>
       </Router>
     </>

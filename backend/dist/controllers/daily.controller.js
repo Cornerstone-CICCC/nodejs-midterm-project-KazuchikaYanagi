@@ -44,11 +44,14 @@ const addDailies = (req, res) => {
 const updateDailyById = (req, res) => {
     const { userId } = req.session;
     const { id } = req.params;
+    console.log("ID:", id);
     // const { title, content, published } = req.body;
-    const { title, content, image } = req.body;
+    // const { title, content, image } = req.body;
+    const { title, content } = req.body;
     console.log(req.body);
     // const article = dailyModel.edit(id, { title, content, published, userId });
-    const article = daily_model_1.default.edit(id, { title, content, image, userId });
+    // const article = dailyModel.edit(id, { title, content, image, userId });
+    const article = daily_model_1.default.edit(id, { title, content, userId });
     if (!article) {
         res.status(404).json({ message: "Daily not found" });
         return;

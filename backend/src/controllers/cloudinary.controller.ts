@@ -26,6 +26,29 @@ const uploadImage = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const updateImage = async (req: Request, res: Response) => {
+  try {
+    // const file = req.file?.path; // Path to the file
+    const newFile = req.file?.path; // Path to the file
+    console.log(newFile);
+    console.log(req.file);
+    if (!newFile) {
+      res.status(400).json({ success: false, message: "No file uploaded" });
+      return;
+    }
+    const result = await cloudinary.uploader.upload(newFile, {
+      overwrite: true,
+    });
+    res.status(200).json({
+      success: true,
+      message: "File uploaded successfully!",
+      result,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: (err as Error).message });
+  }
+};
+
 const retrieveImage = async (req: Request, res: Response) => {
   try {
     const resources = await cloudinary.api.resources({
@@ -43,5 +66,6 @@ const retrieveImage = async (req: Request, res: Response) => {
 
 export default {
   uploadImage,
+  updateImage,
   retrieveImage,
 };
