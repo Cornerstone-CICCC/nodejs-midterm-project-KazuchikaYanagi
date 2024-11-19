@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import { createContext, useState } from "react";
 import Daily from "./pages/Daily";
 import DetailDaily from "./pages/DetailDaily";
+import Main from "./pages/Main";
 
 function App() {
   // const DailyContext = createContext();
@@ -23,8 +24,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Login setIsAuth={setIsAuth} />} />
+          <Route path="/" element={<Main setIsAuth={setIsAuth} />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/createDaily"
             element={<CreateDaily setPostData={setPostData} />}
