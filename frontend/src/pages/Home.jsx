@@ -14,8 +14,9 @@ const Home = () => {
   // console.log(auth);
 
   const handleLogout = async () => {
-    const res = await axios.get("http://localhost:3001/users/logout");
-    console.log(res);
+    const res = await axios.get("http://localhost:3001/users/logout", {
+      withCredentials: true,
+    });
     navigate("/");
   };
 

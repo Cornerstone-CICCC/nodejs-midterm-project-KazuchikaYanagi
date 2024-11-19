@@ -78,12 +78,15 @@ const Login = () => {
           >
             Login
           </button>
-          <button
-            onClick={handleNavigateRegisterPage}
-            className="text-blue-400 underline hover:text-blue-500"
-          >
-            Register New Account
-          </button>
+          <span className="font-semibold">
+            Do you have an account?
+            <button
+              onClick={handleNavigateRegisterPage}
+              className="text-blue-400 underline hover:text-blue-500 pl-3"
+            >
+              Register New Account
+            </button>
+          </span>
         </div>
       </form>
     </div>
