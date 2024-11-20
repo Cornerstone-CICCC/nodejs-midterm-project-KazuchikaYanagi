@@ -13,7 +13,6 @@ const CreateDaily = () => {
   const handleUploadImage = (e) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      console.log(file);
       setIsImage(true);
       setImage(file);
     }
@@ -22,7 +21,6 @@ const CreateDaily = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(image);
       if (!image) {
         console.error("Image file is missing");
         return navigate("/home");
@@ -38,7 +36,6 @@ const CreateDaily = () => {
           withCredentials: true,
         }
       );
-      console.log(imgUpload);
 
       const res = await axios.post(
         "http://localhost:3001/dailies/add",
@@ -51,10 +48,10 @@ const CreateDaily = () => {
         { withCredentials: true }
       );
 
-      console.log(res.data);
       navigate("/home");
     } catch (err) {
       console.error(err);
+      navigate("/login");
     }
   };
 
