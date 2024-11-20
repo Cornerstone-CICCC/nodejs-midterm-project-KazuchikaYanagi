@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import RenderPost from "../components/RenderPost";
 
 const Home = () => {
   const [isDaily, setIsDaily] = useState([]);
-  // const [auth, setAuth] = useState(document.cookie);
   const navigate = useNavigate();
-
-  // const allCookie = document.cookie;
-  // console.log(allCookie);
-
-  // console.log(auth);
 
   const handleLogout = async () => {
     const res = await axios.get("http://localhost:3001/users/logout", {
@@ -29,6 +23,7 @@ const Home = () => {
         setIsDaily(allData.data);
       } catch (err) {
         console.error(err);
+        navigate("/login");
       }
     };
     getDaily();
