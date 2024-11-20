@@ -37,7 +37,7 @@ const CreateDaily = () => {
         }
       );
 
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:3001/dailies/add",
         {
           title: title,

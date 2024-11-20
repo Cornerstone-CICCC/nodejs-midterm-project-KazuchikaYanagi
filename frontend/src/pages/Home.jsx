@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RenderPost from "../components/RenderPost";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    const res = await axios.get("http://localhost:3001/users/logout", {
+    await axios.get("http://localhost:3001/users/logout", {
       withCredentials: true,
     });
     navigate("/");
